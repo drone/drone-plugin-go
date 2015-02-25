@@ -7,7 +7,7 @@ This is a package with simple support for writing Drone plugins in Go.
 
 Plugins are executable files run by Drone to customize the build lifecycle. Plugins receive input data from `stdin` and writes results to `stdout`
 
-```
+```sh
 ./slack-plugin <<EOF
 {
     "repo" : {
