@@ -57,7 +57,7 @@ plugin.Parse()
 
 ### Shared Volumes
 
-The repository clone directory (ie `clone.dir` input parameter) will be shared across all plugins. This means that anything files in your repository directory or subdirectories are accessible to plugins. This is useful for plugins that analyze or archive files, such as an S3 plugin.
+The repository clone directory (ie `clone.dir` input parameter) will be shared across all plugins as a [container volume](https://docs.docker.com/userguide/dockervolumes/#creating-and-mounting-a-data-volume-container). This means that any files in your repository directory or subdirectories are accessible to plugins. This is useful for plugins that analyze or archive files, such as an S3 plugin.
 
 ### Publishing
 
