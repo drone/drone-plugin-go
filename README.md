@@ -24,6 +24,13 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
         "pull_request": "800",
         "author": "john.smith@gmail.com",
         "message": "Update the Readme"
+    },
+    "clone" : {
+        "branch": "master",
+        "remote": "git://github.com/drone/drone",
+        "dir": "/drone/src/github.com/drone/drone",
+        "ref": "refs/heads/master",
+        "sha": "436b7a6e2abaddfd35740527353e78a227ddcb2c"
     }
 }
 EOF
@@ -33,6 +40,7 @@ To read this data you can use the `plugin` package to declare and parse paramete
 
 ```Go
 var repo = plugin.Repo{}
+var clone = plugin.Clonse{}
 var commit = plugin.Commit{}
 var config = struct {
 	URL      string `json:"webhook_url"`
@@ -45,3 +53,7 @@ plugin.Param(&commit)
 plugin.Param(&config)
 plugin.Parse()
 ```
+
+### Shared Volumes
+
+The repository clone directory (ie `clone.dir` input parameter) will be shared across all plugins. This means that anything files in your repository directory or subdirectories are accessible to plugins. This is useful for plugins that analyze or archive files, such as an S3 plugin.
