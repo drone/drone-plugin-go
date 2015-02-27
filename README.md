@@ -31,6 +31,11 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
         "dir": "/drone/src/github.com/drone/drone",
         "ref": "refs/heads/master",
         "sha": "436b7a6e2abaddfd35740527353e78a227ddcb2c"
+    },
+    "data": {
+        webhook_url: 'https://hooks.slack.com/services/...',
+        username: drone, 
+        channel: #dev
     }
 }
 EOF
@@ -42,8 +47,8 @@ To read this data you can use the `plugin` package to declare and parse paramete
 var repo = plugin.Repo{}
 var clone = plugin.Clonse{}
 var commit = plugin.Commit{}
-var config = struct {
-	URL      string `json:"webhook_url"`
+var data = struct {
+    URL      string `json:"webhook_url"`
     Username string `json:"username"`
     Channel  string `json:"channel"`
 }{}
@@ -51,9 +56,11 @@ var config = struct {
 plugin.Param(&repo)
 plugin.Param(&clone)
 plugin.Param(&commit)
-plugin.Param(&config)
+plugin.Param(&data)
 plugin.Parse()
 ```
+
+Your plugin configuration data (from the `.drone.yml` file) will be provided in the `data` section of the JSON input.
 
 ### Shared Volumes
 
