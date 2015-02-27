@@ -49,6 +49,7 @@ var config = struct {
 }{}
 
 plugin.Param(&repo)
+plugin.Param(&clone)
 plugin.Param(&commit)
 plugin.Param(&config)
 plugin.Parse()
