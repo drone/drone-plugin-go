@@ -32,7 +32,7 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
         "ref": "refs/heads/master",
         "sha": "436b7a6e2abaddfd35740527353e78a227ddcb2c"
     },
-    "data": {
+    "vargs": {
         webhook_url: 'https://hooks.slack.com/services/...',
         username: drone, 
         channel: #dev
@@ -47,20 +47,20 @@ Use this `plugin` package to retrieve and parse input parameters:
 var repo = plugin.Repo{}
 var clone = plugin.Clonse{}
 var commit = plugin.Commit{}
-var data = struct {
+var slack = struct {
     URL      string `json:"webhook_url"`
     Username string `json:"username"`
     Channel  string `json:"channel"`
 }{}
 
-plugin.Param(&repo)
-plugin.Param(&clone)
-plugin.Param(&commit)
-plugin.Param(&data)
+plugin.Param("repo", &repo)
+plugin.Param("clone", &clone)
+plugin.Param("commit", &commit)
+plugin.Param("vargs", &slack)
 plugin.Parse()
 ```
 
-Note that your plugin configuration data (declared in the `.drone.yml` file) will be provided in the `data` section of the JSON input.
+Note that your plugin configuration data (declared in the `.drone.yml` file) will be provided in the `vargs` section of the JSON input.
 
 ### Shared Volumes
 
@@ -72,7 +72,7 @@ Drone plugins are distributed as Docker images. We therefore recommend publishin
 
 The `ENTRYPOINT` must be defined and must point to your executable file. The `CMD` section will be overridden by Drone and will be used to send the JSON encoded data in `arg[1]`. An example Dockerfile for your plugin might look like this:
 
-```
+```Dockerfile
 # Docker image for Drone's git-clone plugin
 #
 #     docker build -t drone/drone-clone-git .

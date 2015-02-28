@@ -56,3 +56,8 @@ type Config struct {
 	Branches []string `json:"branches"`
 	Services []string `json:"services"`
 }
+
+type Links struct {
+	Repo   string `json:"repo_url"`
+	Commit string `json:"repo_url"`
+}
