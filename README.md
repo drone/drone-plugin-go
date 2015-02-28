@@ -33,9 +33,9 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
         "sha": "436b7a6e2abaddfd35740527353e78a227ddcb2c"
     },
     "vargs": {
-        webhook_url: 'https://hooks.slack.com/services/...',
-        username: drone, 
-        channel: #dev
+        "webhook_url": "https://hooks.slack.com/services/...",
+        "username": "drone", 
+        "channel": "#dev"
     }
 }
 EOF
