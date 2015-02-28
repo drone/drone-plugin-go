@@ -59,5 +59,5 @@ type Config struct {
 
 type Links struct {
 	Repo   string `json:"repo_url"`
-	Commit string `json:"repo_url"`
+	Commit string `json:"commit_url"`
 }

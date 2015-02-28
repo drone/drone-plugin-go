@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"io"
 	"os"
-
-	"github.com/mitchellh/mapstructure"
 )
 
 var Stdin *ParamSet
@@ -39,14 +37,14 @@ func (p ParamSet) Param(name string, value interface{}) {
 
 // Parse parses parameter definitions from the map.
 func (p ParamSet) Parse() error {
-	data := map[string]interface{}{}
-	err := json.NewDecoder(p.reader).Decode(&data)
+	raw := map[string]json.RawMessage{}
+	err := json.NewDecoder(p.reader).Decode(&raw)
 	if err != nil {
 		return err
 	}
 
 	for key, val := range p.params {
-		err := mapstructure.Decode(data[key], val)
+		err := json.Unmarshal(raw[key], val)
 		if err != nil {
 			return err
 		}
