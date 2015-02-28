@@ -45,7 +45,7 @@ Use this `plugin` package to retrieve and parse input parameters:
 
 ```Go
 var repo = plugin.Repo{}
-var clone = plugin.Clonse{}
+var clone = plugin.Clone{}
 var commit = plugin.Commit{}
 var slack = struct {
     URL      string `json:"webhook_url"`
