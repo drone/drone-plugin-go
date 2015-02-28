@@ -5,7 +5,7 @@ This is a package with simple support for writing Drone plugins in Go.
 
 ## Overview
 
-Plugins are executable files run by Drone to customize the build lifecycle. Plugins receive input data from `stdin` (or `arg[1]`) and writes results to `stdout`
+Plugins are executable files run by Drone to customize the build lifecycle. Plugins receive input data from `stdin` (or `arg[1]`) and write the results to `stdout`
 
 ```sh
 ./slack-plugin <<EOF
@@ -41,7 +41,7 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
 EOF
 ```
 
-To read this data you can use the `plugin` package to declare and parse parameters. If you've worked with the `flag` package this should look familiar:
+Use this `plugin` package to retrieve and parse input parameters:
 
 ```Go
 var repo = plugin.Repo{}
@@ -60,7 +60,7 @@ plugin.Param(&data)
 plugin.Parse()
 ```
 
-Your plugin configuration data (from the `.drone.yml` file) will be provided in the `data` section of the JSON input.
+Note that your plugin configuration data (declared in the `.drone.yml` file) will be provided in the `data` section of the JSON input.
 
 ### Shared Volumes
 
