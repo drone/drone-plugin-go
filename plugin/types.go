@@ -49,14 +49,6 @@ type Commit struct {
 	Message     string `json:"message"`
 }
 
-type Config struct {
-	Image    string   `json:"image"`
-	Env      []string `json:"env"`
-	Script   []string `json:"script"`
-	Branches []string `json:"branches"`
-	Services []string `json:"services"`
-}
-
 type Links struct {
 	Repo   string `json:"repo_url"`
 	Commit string `json:"commit_url"`
