@@ -1,11 +1,10 @@
 package plugin
 
 const (
-	StatusNone    = "None"
-	StatusEnqueue = "Pending"
-	StatusStarted = "Started"
-	StatusSuccess = "Success"
-	StatusFailure = "Failure"
-	StatusError   = "Error"
-	StatusKilled  = "Killed"
+	StatePending = "pending"
+	StateRunning = "running"
+	StateSuccess = "success"
+	StateFailure = "failure"
+	StateKilled  = "killed"
+	StateError   = "error"
 )

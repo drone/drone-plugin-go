@@ -6,16 +6,12 @@ import (
 	"github.com/drone/drone-plugin-go/plugin"
 )
 
-type Repo struct {
-	Host  string `json:"host"`
-	Owner string `json:"owner"`
-	Name  string `json:"name"`
-}
-
 func main() {
-	repo := Repo{}
+	repo := plugin.Repo{}
+	build := plugin.Build{}
 	plugin.Param("repo", &repo)
+	plugin.Param("build", &build)
 	plugin.Parse()
 
-	fmt.Printf("git://%s/%s/%s.git\n", repo.Host, repo.Owner, repo.Name)
+	fmt.Printf("hello %s/%s/%v\n", repo.Owner, repo.Name, build.Number)
 }
