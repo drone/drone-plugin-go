@@ -1,7 +1,12 @@
 package plugin
 
 type Clone struct {
-	Dir string `json:"dir"`
+	Origin string `json:"origin"`
+	Remote string `json:"remote"`
+	Branch string `json:"branch"`
+	Sha    string `json:"sha"`
+	Ref    string `json:"ref"`
+	Dir    string `json:"dir"`
 
 	Netrc struct {
 		Machine  string `json:"machine"`
