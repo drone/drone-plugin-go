@@ -21,71 +21,54 @@ type Clone struct {
 }
 
 type Repo struct {
-	Owner    string `json:"owner"`
-	Name     string `json:"name"`
-	FullName string `json:"full_name"`
-	Language string `json:"language"`
-	Private  bool   `json:"private"`
-	Link     string `json:"link_url"`
-	Clone    string `json:"clone_url"`
-	Branch   string `json:"default_branch"`
-	Last     Build  `json:"last_build,omitempty"`
-}
-
-type Build struct {
-	Number      int         `json:"number"`
-	State       string      `json:"state"`
-	Duration    int64       `json:"duration"`
-	Started     int64       `json:"started_at"`
-	Finished    int64       `json:"finished_at"`
-	Created     int64       `json:"created_at"`
-	Updated     int64       `json:"updated_at"`
-	Commit      Commit      `json:"head_commit,omitempty"`
-	PullRequest PullRequest `json:"pull_request,omitempty"`
-	Tasks       []Task      `json:"tasks,omitempty"`
+	Owner       string `json:"owner"`
+	Name        string `json:"name"`
+	FullName    string `json:"full_name"`
+	Language    string `json:"language"`
+	Private     bool   `json:"private"`
+	Self        string `json:"self_url"`
+	Link        string `json:"link_url"`
+	Clone       string `json:"clone_url"`
+	Branch      string `json:"default_branch"`
+	Timeout     int64  `json:"timeout"`
+	Trusted     bool   `json:"trusted"`
+	PostCommit  bool   `json:"post_commits"`
+	PullRequest bool   `json:"pull_requests"`
+	Created     int64  `json:"created_at"`
+	Updated     int64  `json:"updated_at"`
 }
 
 type Commit struct {
-	Sha       string `json:"sha,omitempty"`
-	Ref       string `json:"ref,omitempty"`
-	Message   string `json:"message,omitempty"`
-	Timestamp string `json:"timestamp,omitempty"`
-	Author    Author `json:"author,omitempty"`
-	Remote    Remote `json:"repo,omitempty"`
+	Sequence     int    `json:"sequence"`
+	State        string `json:"state"`
+	Started      int64  `json:"started_at"`
+	Finished     int64  `json:"finished_at"`
+	Sha          string `json:"sha"`
+	Ref          string `json:"ref"`
+	PullRequest  string `json:"pull_request,omitempty"`
+	Branch       string `json:"branch"`
+	Author       string `json:"author"`
+	Gravatar     string `json:"gravatar"`
+	Timestamp    string `json:"timestamp"`
+	Message      string `json:"message"`
+	SourceRemote string `json:"source_remote,omitempty"`
+	SourceBranch string `json:"source_branch,omitempty"`
+	SourceSha    string `json:"source_sha,omitempty"`
+	Created      int64  `json:"created_at"`
+	Updated      int64  `json:"updated_at"`
+
+	Builds []*Build `json:"builds,omitempty"`
 }
 
-type PullRequest struct {
-	Number int    `json:"number,omitempty"`
-	Title  string `json:"title,omitempty"`
-	Source Commit `json:"source,omitempty"`
-	Target Commit `json:"target,omitempty"`
-}
-
-type Author struct {
-	Name     string `json:"name,omitempty"`
-	Login    string `json:"login,omitempty"`
-	Email    string `json:"email,omitempty"`
-	Gravatar string `json:"gravatar_id,omitempty"`
-}
-
-type Remote struct {
-	Name     string `json:"name,omitempty"`
-	FullName string `json:"full_name,omitempty"`
-	Clone    string `json:"clone_url,omitempty"`
-}
-
-type Task struct {
-	Number   int    `json:"number"`
+type Build struct {
 	State    string `json:"state"`
 	ExitCode int    `json:"exit_code"`
+	Sequence int    `json:"sequence"`
 	Duration int64  `json:"duration"`
 	Started  int64  `json:"started_at"`
 	Finished int64  `json:"finished_at"`
+	Created  int64  `json:"created_at"`
+	Updated  int64  `json:"updated_at"`
 
-	Environment map[string]string `json:"environment,omitempty"`
-}
-
-type Links struct {
-	Repo   string `json:"repo_url"`
-	Commit string `json:"commit_url"`
+	Environment map[string]string `json:"environment"`
 }
