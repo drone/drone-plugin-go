@@ -15,8 +15,8 @@ type Clone struct {
 	} `json:"netrc"`
 
 	Keypair struct {
-		Public  string `json:"public"`
-		Private string `json:"private"`
+		Public  []byte `json:"public"`
+		Private []byte `json:"private"`
 	} `json:"keypair"`
 }
 
