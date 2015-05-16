@@ -44,7 +44,11 @@ func (p ParamSet) Parse() error {
 	}
 
 	for key, val := range p.params {
-		err := json.Unmarshal(raw[key], val)
+		data, ok := raw[key]
+		if !ok {
+			continue
+		}
+		err := json.Unmarshal(data, val)
 		if err != nil {
 			return err
 		}
