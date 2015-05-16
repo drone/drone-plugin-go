@@ -8,10 +8,10 @@ import (
 
 func main() {
 	repo := plugin.Repo{}
-	build := plugin.Build{}
+	commit := plugin.Commit{}
 	plugin.Param("repo", &repo)
-	plugin.Param("build", &build)
+	plugin.Param("commit", &commit)
 	plugin.Parse()
 
-	fmt.Printf("hello %s/%s/%v\n", repo.Owner, repo.Name, build.Number)
+	fmt.Printf("hello %s/%s/%v\n", repo.Owner, repo.Name, commit.Sequence)
 }
