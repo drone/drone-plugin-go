@@ -12,12 +12,12 @@ type Clone struct {
 		Machine  string `json:"machine"`
 		Login    string `json:"login"`
 		Password string `json:"user"`
-	}
+	} `json:"netrc"`
 
 	Keypair struct {
 		Public  string `json:"public"`
 		Private string `json:"private"`
-	}
+	} `json:"keypair"`
 }
 
 type Repo struct {
