@@ -59,8 +59,7 @@ Use this `plugin` package to retrieve and parse input parameters:
 
 ```Go
 var repo = plugin.Repo{}
-var clone = plugin.Clone{}
-var commit = plugin.Commit{}
+var build = plugin.Build{}
 var slack = struct {
     URL      string `json:"webhook_url"`
     Username string `json:"username"`
@@ -68,8 +67,7 @@ var slack = struct {
 }{}
 
 plugin.Param("repo", &repo)
-plugin.Param("clone", &clone)
-plugin.Param("commit", &commit)
+plugin.Param("build", &build)
 plugin.Param("vargs", &slack)
 plugin.Parse()
 ```
