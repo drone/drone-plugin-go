@@ -11,20 +11,34 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
 ./slack-plugin <<EOF
 {
     "repo" : {
-        "host": "github.com",
         "owner": "foo",
-        "name": "bar"
+        "name": "bar",
+        "full_name": "foo/bar"
     },
-    "commit" : {
-        "status": "Success",
+    "build" : {
+        "number": 1
+        "status": "success",
         "started_at": 1421029603,
         "finished_at": 1421029813,
-        "sha": "9f2849d5",
-        "branch": "master",
-        "pull_request": "800",
-        "author": "john.smith@gmail.com",
-        "message": "Update the Readme"
+        "head_commit" : {
+            "sha": "9f2849d5",
+            "ref": "refs/heads/master"
+            "branch": "master",
+            "message": "Update the Readme",
+            "author": {
+                "login": "johnsmith"
+                "email": "john.smith@gmail.com",
+            }
+        }
     },
+    "job" : {
+        "number": 1,
+        "status": "success",
+        "started_at": 1421029603,
+        "finished_at": 1421029813,
+        "exit_code": 0,
+        "environment": { "GO_VERSION": "1.4" }
+    }
     "clone" : {
         "branch": "master",
         "remote": "git://github.com/drone/drone",
@@ -34,7 +48,7 @@ Plugins are executable files run by Drone to customize the build lifecycle. Plug
     },
     "vargs": {
         "webhook_url": "https://hooks.slack.com/services/...",
-        "username": "drone", 
+        "username": "drone",
         "channel": "#dev"
     }
 }
