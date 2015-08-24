@@ -37,12 +37,37 @@ type Repo struct {
 	Timeout  int64  `json:"timeout"`
 }
 
+// System provides important information about the Drone
+// server to the plugin.
+type System struct {
+	Version string   `json:"version"`
+	Link    string   `json:"link_url"`
+	Plugins string   `json:"plugins"`
+	Globals []string `json:"globals"`
+}
+
+// Workspace defines the build's workspace inside the
+// container. This helps the plugin understand locate
+// the source code directory.
+type Workspace struct {
+	Path string `json:"path"`
+}
+
 // Keypair represents an RSA public and private key assigned to a
 // repository. It may be used to clone private repositories, or as
 // a deployment key.
 type Keypair struct {
 	Public  string `json:"public,omitempty"`
 	Private string `json:"private,omitempty"`
+}
+
+// Netrc defines a default .netrc file that should be injected
+// into the build environment. It will be used to authorize access
+// to https resources, such as git+https clones.
+type Netrc struct {
+	Machine  string `json:"machine"`
+	Login    string `json:"login"`
+	Password string `json:"user"`
 }
 
 // Build represents the process of compiling and testing a changeset,
