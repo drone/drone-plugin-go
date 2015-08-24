@@ -42,7 +42,7 @@ type Repo struct {
 type System struct {
 	Version string   `json:"version"`
 	Link    string   `json:"link_url"`
-	Plugins string   `json:"plugins"`
+	Plugins []string `json:"plugins"`
 	Globals []string `json:"globals"`
 }
 
