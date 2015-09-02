@@ -1,28 +1,5 @@
 package plugin
 
-// Clone is probably something that can be deprecated. Need to figure out
-// how to properly restructure ... will need to pass netrc, keys and workspace
-// directory to the plugin somehow.
-type Clone struct {
-	Origin string `json:"origin"`
-	Remote string `json:"remote"`
-	Branch string `json:"branch"`
-	Sha    string `json:"sha"`
-	Ref    string `json:"ref"`
-	Dir    string `json:"dir"`
-
-	Netrc struct {
-		Machine  string `json:"machine"`
-		Login    string `json:"login"`
-		Password string `json:"user"`
-	} `json:"netrc"`
-
-	Keypair struct {
-		Public  string `json:"public"`
-		Private string `json:"private"`
-	} `json:"keypair"`
-}
-
 // Repo represents a version control repository.
 type Repo struct {
 	Owner    string `json:"owner"`
@@ -47,10 +24,14 @@ type System struct {
 }
 
 // Workspace defines the build's workspace inside the
-// container. This helps the plugin understand locate
-// the source code directory.
+// container. This helps the plugin locate the source
+// code directory.
 type Workspace struct {
+	Root string `json:"root"`
 	Path string `json:"path"`
+
+	Netrc *Netrc   `json:"netrc"`
+	Keys  *Keypair `json:"keys"`
 }
 
 // Keypair represents an RSA public and private key assigned to a
