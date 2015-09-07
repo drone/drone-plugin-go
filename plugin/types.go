@@ -108,3 +108,9 @@ type Job struct {
 
 	Environment map[string]string `json:"environment"`
 }
+
+// IsPullRequest is a helper function that returns True if
+// the build is a Pull Request.
+func IsPullRequest(build *Build) bool {
+	return build.PullRequest != nil && build.PullRequest.Number != 0
+}
