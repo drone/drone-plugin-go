@@ -8,3 +8,10 @@ const (
 	StateKilled  = "killed"
 	StateError   = "error"
 )
+
+const (
+	EventPush   = "push"
+	EventPull   = "pull_request"
+	EventTag    = "tag"
+	EventDeploy = "deploy"
+)

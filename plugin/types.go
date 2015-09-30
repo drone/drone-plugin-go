@@ -2,16 +2,20 @@ package plugin
 
 // Repo represents a version control repository.
 type Repo struct {
-	Owner    string `json:"owner"`
-	Name     string `json:"name"`
-	FullName string `json:"full_name"`
-	Self     string `json:"self_url"`
-	Link     string `json:"link_url"`
-	Clone    string `json:"clone_url"`
-	Branch   string `json:"default_branch"`
-	Private  bool   `json:"private"`
-	Trusted  bool   `json:"trusted"`
-	Timeout  int64  `json:"timeout"`
+	Owner       string `json:"owner"`
+	Name        string `json:"name"`
+	FullName    string `json:"full_name"`
+	Avatar      string `json:"avatar_url"`
+	Link        string `json:"link_url"`
+	Clone       string `json:"clone_url"`
+	Branch      string `json:"default_branch"`
+	Timeout     int64  `json:"timeout"`
+	IsPrivate   bool   `json:"private"`
+	IsTrusted   bool   `json:"trusted"`
+	AllowPull   bool   `json:"allow_pr"`
+	AllowPush   bool   `json:"allow_push"`
+	AllowDeploy bool   `json:"allow_deploys"`
+	AllowTag    bool   `json:"allow_tags"`
 }
 
 // System provides important information about the Drone
@@ -38,8 +42,8 @@ type Workspace struct {
 // repository. It may be used to clone private repositories, or as
 // a deployment key.
 type Keypair struct {
-	Public  string `json:"public,omitempty"`
-	Private string `json:"private,omitempty"`
+	Public  string `json:"public"`
+	Private string `json:"private"`
 }
 
 // Netrc defines a default .netrc file that should be injected
@@ -54,46 +58,24 @@ type Netrc struct {
 // Build represents the process of compiling and testing a changeset,
 // typically triggered by the remote system (ie GitHub).
 type Build struct {
-	Number   int    `json:"number"`
-	Status   string `json:"status"`
-	Started  int64  `json:"started_at"`
-	Finished int64  `json:"finished_at"`
-
-	// Commit that is being built. If this is a pull request it
-	// represents the source commit (from the fork)
-	Commit *Commit `json:"head_commit"`
-
-	// PullRequest that is being built. Nil if not a pull request.
-	PullRequest *PullRequest `json:"pull_request"`
-}
-
-// PullRequest represents a proposed revision to
-// the repository.
-type PullRequest struct {
-	Number int    `json:"number"`
-	Title  string `json:"title"`
-
-	// Base represents the base commit on top of which
-	// the change was made. It is the target of this
-	// pull request.
-	Base *Commit `json:"base_commit"`
-}
-
-// Commit represents a revision made to the repository.
-type Commit struct {
-	Sha       string  `json:"sha"`
-	Ref       string  `json:"ref"`
-	Branch    string  `json:"branch"`
-	Message   string  `json:"message"`
-	Timestamp string  `json:"timestamp"`
-	Remote    string  `json:"remote"`
-	Author    *Author `json:"author"`
-}
-
-// Author represents the author of a code change.
-type Author struct {
-	Login string `json:"login"`
-	Email string `json:"email"`
+	Number    int    `json:"number"`
+	Event     string `json:"event"`
+	Status    string `json:"status"`
+	Created   int64  `json:"created_at"`
+	Started   int64  `json:"started_at"`
+	Finished  int64  `json:"finished_at"`
+	Commit    string `json:"commit"`
+	Branch    string `json:"branch"`
+	Ref       string `json:"ref"`
+	Refspec   string `json:"refspec"`
+	Remote    string `json:"remote"`
+	Title     string `json:"title"`
+	Message   string `json:"message"`
+	Timestamp string `json:"timestamp"`
+	Author    string `json:"author"`
+	Avatar    string `json:"author_avatar"`
+	Email     string `json:"author_email"`
+	Link      string `json:"link_url"`
 }
 
 // Job represents a single job that is being executed as part
@@ -107,10 +89,4 @@ type Job struct {
 	Finished int64  `json:"finished_at"`
 
 	Environment map[string]string `json:"environment"`
-}
-
-// IsPullRequest is a helper function that returns True if
-// the build is a Pull Request.
-func IsPullRequest(build *Build) bool {
-	return build.PullRequest != nil && build.PullRequest.Number != 0
 }
