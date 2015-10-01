@@ -61,6 +61,7 @@ type Build struct {
 	Number    int    `json:"number"`
 	Event     string `json:"event"`
 	Status    string `json:"status"`
+	Enqueued  int64  `json:"enqueued_at"`
 	Created   int64  `json:"created_at"`
 	Started   int64  `json:"started_at"`
 	Finished  int64  `json:"finished_at"`
@@ -71,7 +72,7 @@ type Build struct {
 	Remote    string `json:"remote"`
 	Title     string `json:"title"`
 	Message   string `json:"message"`
-	Timestamp string `json:"timestamp"`
+	Timestamp int64  `json:"timestamp"`
 	Author    string `json:"author"`
 	Avatar    string `json:"author_avatar"`
 	Email     string `json:"author_email"`
@@ -85,6 +86,7 @@ type Job struct {
 	Number   int    `json:"number"`
 	Status   string `json:"status"`
 	ExitCode int    `json:"exit_code"`
+	Enqueued int64  `json:"enqueued_at"`
 	Started  int64  `json:"started_at"`
 	Finished int64  `json:"finished_at"`
 
