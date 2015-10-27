@@ -2,6 +2,7 @@ package plugin
 
 // Repo represents a version control repository.
 type Repo struct {
+	Kind        string `json:"scm"`
 	Owner       string `json:"owner"`
 	Name        string `json:"name"`
 	FullName    string `json:"full_name"`
@@ -65,6 +66,7 @@ type Build struct {
 	Created   int64  `json:"created_at"`
 	Started   int64  `json:"started_at"`
 	Finished  int64  `json:"finished_at"`
+	Deploy    string `json:"deploy_to"`
 	Commit    string `json:"commit"`
 	Branch    string `json:"branch"`
 	Ref       string `json:"ref"`
