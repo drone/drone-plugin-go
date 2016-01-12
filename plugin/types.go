@@ -22,10 +22,11 @@ type Repo struct {
 // System provides important information about the Drone
 // server to the plugin.
 type System struct {
-	Version string   `json:"version"`
-	Link    string   `json:"link_url"`
-	Plugins []string `json:"plugins"`
-	Globals []string `json:"globals"`
+	Version   string   `json:"version"`
+	Link      string   `json:"link_url"`
+	Plugins   []string `json:"plugins"`
+	Globals   []string `json:"globals"`
+	Escalates []string `json:"privileged_plugins"`
 }
 
 // Workspace defines the build's workspace inside the
