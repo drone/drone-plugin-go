@@ -36,8 +36,8 @@ type Workspace struct {
 	Root string `json:"root"`
 	Path string `json:"path"`
 
-	Netrc *Netrc   `json:"netrc"`
-	Keys  *Keypair `json:"keys"`
+	Netrc []*NetrcEntry `json:"netrc"`
+	Keys  *Keypair      `json:"keys"`
 }
 
 // Keypair represents an RSA public and private key assigned to a
@@ -48,10 +48,10 @@ type Keypair struct {
 	Private string `json:"private"`
 }
 
-// Netrc defines a default .netrc file that should be injected
-// into the build environment. It will be used to authorize access
-// to https resources, such as git+https clones.
-type Netrc struct {
+// NetrcEntry defines a "machine" entry in a .netrc file that should
+// be injected into the build environment. It will be used to
+// authorize access to https resources, such as git+https clones.
+type NetrcEntry struct {
 	Machine  string `json:"machine"`
 	Login    string `json:"login"`
 	Password string `json:"user"`
